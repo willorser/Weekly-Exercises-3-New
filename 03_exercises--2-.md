@@ -16,42 +16,8 @@ output:
 
 ```r
 library(tidyverse)     # for graphing and data cleaning
-```
-
-```
-## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-```
-
-```
-## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-## ✓ tibble  3.0.3     ✓ dplyr   1.0.2
-## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.5.0
-```
-
-```
-## ── Conflicts ─────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
-```r
 library(googlesheets4) # for reading googlesheet data
 library(lubridate)     # for date manipulation
-```
-
-```
-## 
-## Attaching package: 'lubridate'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     date, intersect, setdiff, union
-```
-
-```r
 library(ggthemes)      # for even more plotting themes
 library(geofacet)      # for special faceting with US map layout
 gs4_deauth()           # To not have to authorize each time you knit.
@@ -63,58 +29,18 @@ theme_set(theme_minimal())       # My favorite ggplot() theme :)
 #Lisa's garden data
 garden_harvest <- read_sheet("https://docs.google.com/spreadsheets/d/1DekSazCzKqPS2jnGhKue7tLxRU3GVL1oxi-4bEM5IWw/edit?usp=sharing") %>% 
   mutate(date = ymd(date))
-```
 
-```
-## Reading from "2020_harvest"
-```
-
-```
-## Range "Sheet1"
-```
-
-```r
 # Seeds/plants (and other garden supply) costs
 supply_costs <- read_sheet("https://docs.google.com/spreadsheets/d/1dPVHwZgR9BxpigbHLnA0U99TtVHHQtUzNB9UR0wvb7o/edit?usp=sharing",
   col_types = "ccccnn")
-```
 
-```
-## Reading from "2020_seeds"
-## Range "Sheet1"
-```
-
-```r
 # Planting dates and locations
 plant_date_loc <- read_sheet("https://docs.google.com/spreadsheets/d/11YH0NtXQTncQbUse5wOsTtLSKAiNogjUA21jnX5Pnl4/edit?usp=sharing",
   col_types = "cccnDlc")%>% 
   mutate(date = ymd(date))
-```
 
-```
-## Reading from "seeds_planted"
-## Range "Sheet1"
-```
-
-```
-## Warning in .Primitive("as.double")(x, ...): NAs introduced by coercion
-```
-
-```r
 # Tidy Tuesday data
 kids <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-15/kids.csv')
-```
-
-```
-## Parsed with column specification:
-## cols(
-##   state = col_character(),
-##   variable = col_character(),
-##   year = col_double(),
-##   raw = col_double(),
-##   inf_adj = col_double(),
-##   inf_adj_perchild = col_double()
-## )
 ```
 
 ## Setting up on GitHub!
@@ -166,14 +92,6 @@ garden_harvest %>%
               values_from = total_harvest_weight_lbs)
 ```
 
-```
-## `summarise()` regrouping output by 'vegetable', 'date' (override with `.groups` argument)
-```
-
-```
-## `summarise()` regrouping output by 'vegetable' (override with `.groups` argument)
-```
-
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["vegetable"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Saturday"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Friday"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Monday"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Thursday"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Tuesday"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Sunday"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Wednesday"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"asparagus","2":"0.04409240","3":"NA","4":"NA","5":"NA","6":"NA","7":"NA","8":"NA"},{"1":"basil","2":"0.41005932","3":"0.46737944","4":"0.0661386","5":"0.02645544","6":"0.11023100","7":"NA","8":"NA"},{"1":"beans","2":"4.70906832","3":"1.52559704","4":"6.5080382","5":"3.39291018","6":"4.38719380","7":"1.52780166","8":"4.08295624"},{"1":"beets","2":"0.37919464","3":"0.02425082","4":"0.6724091","5":"11.89172028","6":"0.15873264","7":"0.32187452","8":"0.18298346"},{"1":"broccoli","2":"NA","3":"NA","4":"0.8201186","5":"NA","6":"NA","7":"NA","8":"0.70768302"},{"1":"carrots","2":"2.33028334","3":"2.13848140","4":"0.8708249","5":"2.67420406","6":"0.35273920","7":"NA","8":"NA"},{"1":"chives","2":"NA","3":"NA","4":"NA","5":"NA","6":"NA","7":"NA","8":"0.01763696"},{"1":"cilantro","2":"0.03747854","3":"0.07275246","4":"NA","5":"NA","6":"0.00440924","7":"NA","8":"NA"},{"1":"corn","2":"1.31615814","3":"3.44802568","4":"0.7583893","5":"NA","6":"0.72752460","7":"1.45725382","8":"5.30211110"},{"1":"cucumbers","2":"9.64080326","3":"7.42956940","4":"4.7752069","5":"3.30693000","6":"10.04645334","7":"3.10410496","8":"5.30652034"},{"1":"edamame","2":"4.68922674","3":"NA","4":"NA","5":"NA","6":"1.40213832","7":"NA","8":"NA"},{"1":"hot peppers","2":"NA","3":"NA","4":"1.2588380","5":"NA","6":"0.14109568","7":"NA","8":"0.06834322"},{"1":"jalapeño","2":"0.93916812","3":"1.29411194","4":"0.4343101","5":"0.22487124","6":"0.54895038","7":"NA","8":"0.09479866"},{"1":"kale","2":"1.49032312","3":"NA","4":"1.7659006","5":"NA","6":"0.28219136","7":"0.38139926","8":"0.61729360"},{"1":"kohlrabi","2":"NA","3":"NA","4":"NA","5":"0.42108242","6":"NA","7":"NA","8":"NA"},{"1":"lettuce","2":"1.10671924","3":"1.80117454","4":"2.4581513","5":"2.45153744","6":"0.91712192","7":"1.15963012","8":"1.14860702"},{"1":"onions","2":"1.34040896","3":"0.07275246","4":"0.5092672","5":"0.60186126","6":"0.70768302","7":"0.26014516","8":"NA"},{"1":"peas","2":"2.85277828","3":"0.93696350","4":"4.6341112","5":"3.39731942","6":"2.06793356","7":"2.05691046","8":"1.08026380"},{"1":"peppers","2":"1.38229674","3":"0.14991416","4":"0.2535313","5":"0.70988764","6":"1.44402610","7":"NA","8":"0.94798660"},{"1":"potatoes","2":"2.15611836","3":"NA","4":"0.9700328","5":"1.66669272","6":"NA","7":"NA","8":"4.57017726"},{"1":"pumpkins","2":"92.68883866","3":"NA","4":"NA","5":"NA","6":"31.85675900","7":"NA","8":"NA"},{"1":"radish","2":"0.23148510","3":"0.19400656","4":"0.1962112","5":"0.14770954","6":"0.09479866","7":"0.08157094","8":"NA"},{"1":"raspberries","2":"0.53351804","3":"0.57099658","4":"0.1300726","5":"0.28880522","6":"0.33510224","7":"NA","8":"NA"},{"1":"spinach","2":"0.26014516","3":"0.19621118","4":"0.1477095","5":"0.23368972","6":"0.49603950","7":"0.48722102","8":"0.21384814"},{"1":"squash","2":"56.22221924","3":"NA","4":"NA","5":"NA","6":"18.46810174","7":"NA","8":"NA"},{"1":"strawberries","2":"0.16975574","3":"0.48722102","4":"0.4784025","5":"0.08818480","6":"NA","7":"0.08157094","8":"NA"},{"1":"Swiss chard","2":"NA","3":"0.56438272","4":"1.0736499","5":"2.23107544","6":"0.07054784","7":"0.73634308","8":"0.71429688"},{"1":"tomatoes","2":"25.94396816","3":"58.67596130","4":"9.7091465","5":"34.51773534","6":"48.75076206","7":"63.68485794","8":"31.55913530"},{"1":"zucchini","2":"3.41495638","3":"18.72163304","4":"12.1959578","5":"5.74964896","6":"16.46851140","7":"12.23564100","8":"2.04147812"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -190,10 +108,6 @@ garden_harvest %>%
   summarize(total_harvest_lbs = sum(weight) * 0.00220462) %>% 
   left_join(plant_date_loc,
             by = c("vegetable", "variety"))
-```
-
-```
-## `summarise()` regrouping output by 'vegetable' (override with `.groups` argument)
 ```
 
 <div data-pagedtable="false">
@@ -219,13 +133,6 @@ garden_harvest %>%
   group_by(variety) %>% 
   summarize(first_harvest_date = min(date), total_harvest_lbs = sum(weight) * 0.00220462) %>%
   arrange(first_harvest_date) -> ordered_by_date 
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```r
   ordered_by_date
 ```
 
@@ -304,17 +211,6 @@ data_site <-
   "https://www.macalester.edu/~dshuman1/data/112/2014-Q4-Trips-History-Data.rds" 
 Trips <- readRDS(gzcon(url(data_site)))
 Stations<-read_csv("http://www.macalester.edu/~dshuman1/data/112/DC-Stations.csv")
-```
-
-```
-## Parsed with column specification:
-## cols(
-##   name = col_character(),
-##   lat = col_double(),
-##   long = col_double(),
-##   nbBikes = col_double(),
-##   nbEmptyDocks = col_double()
-## )
 ```
 
 **NOTE:** The `Trips` data table is a random subset of 10,000 trips from the full quarterly data. Start with this small data table to develop your analysis commands. **When you have this working well, you should access the full data set of more than 600,000 events by removing `-Small` from the name of the `data_site`.**
@@ -473,28 +369,33 @@ Stations %>%
             by = c("name" = "sstation")) %>%
   group_by(name) %>% 
   mutate(total_departures = n()) %>% 
-  ggplot(aes(x = lat, y = long, size = total_departures)) +
+  ggplot(aes(x = long, y = lat, size = total_departures)) +
   geom_jitter(alpha = 0.3) +
-  labs(title = "Total Departures from Each Rental Location (in spatial relation to each other) ", x = "Latitude", y ="Longitude")
+  labs(title = "Total Departures from Each Rental Location (in spatial relation to each other) ", x = "Longitude", y ="Latitude")
 ```
 
 ![](03_exercises--2-_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
   
   16. Only 14.4% of the trips in our data are carried out by casual users. Create a plot that shows which area(s) have stations with a much higher percentage of departures by casual users. What patterns do you notice? (Again, we'll improve this next week when we learn about maps).
-  
+
+
 
 ```r
 Stations %>%
   left_join(Trips,
             by = c("name" = "sstation")) %>%
-  group_by(name) %>% 
-  mutate(total_departures = n()) %>% 
-  ggplot(aes(x = lat, y = long, size = total_departures, color = client)) +
-  geom_jitter(alpha = 0.3) +
-  labs(title = "Total Departures from Each Rental Location (in spatial relation to each other) ", x = "Latitude", y ="Longitude")
+  group_by(name, long, lat) %>% 
+  summarize(percent_casual= mean(client == "Casual")) %>% 
+  ggplot(aes(x = long, y = lat, color = percent_casual)) +
+  geom_point() +
+  labs(title = "Total Departures from Each Rental Location (in spatial relation to each other", 
+       x = "Longitude", 
+       y ="Latitute")
 ```
 
 ![](03_exercises--2-_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+The areas with a much higher percentage of Casual users are almost all centrally located with respect to the other rental locations.
+
   
 ### Spatiotemporal patterns
 
@@ -562,10 +463,6 @@ Top_Ten_Most_Departures %>%
               values_from = proportion) 
 ```
 
-```
-## `summarise()` regrouping output by 'client' (override with `.groups` argument)
-```
-
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["day_of_week"],"name":[1],"type":["ord"],"align":["right"]},{"label":["Casual"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Registered"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Sun","2":"0.36132316","3":"0.0591427"},{"1":"Mon","2":"0.02035623","3":"0.1698318"},{"1":"Tue","2":"0.01717557","3":"0.1660336"},{"1":"Wed","2":"0.01081425","3":"0.1654910"},{"1":"Thu","2":"0.02735369","3":"0.3353228"},{"1":"Sat","2":"0.56297710","3":"0.1041780"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -581,13 +478,38 @@ A large proportion of Casual users' trips (~0.92) are made on the weekends, Satu
 
   20. Below, provide a link to your GitHub page with this set of Weekly Exercises. Specifically, if the name of the file is 03_exercises.Rmd, provide a link to the 03_exercises.md file, which is the one that will be most readable on GitHub.
   
-  
+[03_exercises--2-.md](https://github.com/willorser/Weekly-Exercises-3-New/blob/master/03_exercises--2-.md) 
+
 
 ## Challenge problem! 
 
 This problem uses the data from the Tidy Tuesday competition this week, `kids`. If you need to refresh your memory on the data, read about it [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-15/readme.md). 
 
   21. In this exercise, you are going to try to replicate the graph below, created by Georgios Karamanis. I'm sure you can find the exact code on GitHub somewhere, but **DON'T DO THAT!** You will only be graded for putting an effort into this problem. So, give it a try and see how far you can get without doing too much googling. HINT: use `facet_geo()`. The graphic won't load below since it came from a location on my computer. So, you'll have to reference the original html on the moodle page to see it.
+
+
+```r
+kids <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-15/kids.csv')
+
+kids %>% 
+  filter(year == c("1997", "2007")) %>% 
+  mutate(inf_adj_perchild = inf_adj_perchild * 1000) %>% 
+  pivot_wider(id_cols = state, 
+              names_from = year, 
+              names_prefix = "year_", 
+              values_from = inf_adj_perchild) %>% 
+  mutate(diff = year_2016 - year_1997) %>% 
+  ggplot(aes(x = inf_adj_perchild)) +
+  geom_point() +
+  geom_segment() +
+  facet_geo(vars(state))
+```
+
+```
+## Error: Problem with `mutate()` input `diff`.
+## x object 'year_2016' not found
+## ℹ Input `diff` is `year_2016 - year_1997`.
+```
   
 
 
